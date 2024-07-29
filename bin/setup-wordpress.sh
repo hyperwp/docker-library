@@ -31,23 +31,23 @@ install_wp() {
     fi
   fi
 
-  if [[ -d "$WP_CORE_DIR" ]]; then
-    echo "\e[1;33mDownloading WordPress Core to $WP_CORE_DIR\e[0m"
+  if [[ ! -d "$WP_CORE_DIR" ]]; then
+    echo "Downloading WordPress Core to $WP_CORE_DIR"
     git clone https://github.com/WordPress/WordPress.git --depth 1 --branch $GIT_BRANCH "$WP_CORE_DIR"
     rm -rf "$WP_CORE_DIR/.git"
   else
-    echo "\e[1;33mWordPress Core already downloaded to $WP_CORE_DIR\e[0m"
-    echo "\e[1;33mTo download a fresh copy, delete the wp directory and re-run this script\e[0m"
+    echo "WordPress Core already downloaded to $WP_CORE_DIR"
+    echo "To download a fresh copy, delete the wp directory and re-run \`lando setup-wordpress\`"
   fi
 
-  if [[ -d "$WP_TESTS_DIR" ]]; then
-    echo "\e[1;33mDownloading WordPress Test Suite to $WP_TESTS_DIR\e[0m"
+  if [[ ! -d "$WP_TESTS_DIR" ]]; then
+    echo "Downloading WordPress Test Suite to $WP_TESTS_DIR"
     mkdir -p "$WP_TESTS_DIR"
     svn export -q "${SVN_URL}"/tests/phpunit/includes/ "$WP_TESTS_DIR/includes"
     svn export -q "${SVN_URL}"/tests/phpunit/data/ "$WP_TESTS_DIR/data"
   else
-    echo "\e[1;33mWordPress Test Suite already downloaded to $WP_TESTS_DIR\e[0m"
-    echo "\e[1;33mTo download a fresh copy, delete the tests/wp-phpunit directory and re-run this script\e[0m"
+    echo "WordPress Test Suite already downloaded to $WP_TESTS_DIR"
+    echo "To download a fresh copy, delete the tests/wp-phpunit directory and re-run \`lando setup-wordpress\`"
   fi
 }
 
