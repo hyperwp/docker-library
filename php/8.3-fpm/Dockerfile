@@ -78,9 +78,11 @@ RUN mkdir -p /usr/share/man/man1 /usr/share/man/man7 \
 	&& docker-php-ext-install gd
 
 COPY ../../bin/xdebug.sh /usr/local/bin/xdebug
+COPY ../../bin/wp-logs.sh /usr/local/bin/wp-logs
 COPY ../../bin/setup-wordpress.sh /usr/local/bin/setup-wordpress
 
 RUN chmod +x /usr/local/bin/xdebug
+RUN chmod +x /usr/local/bin/wp-logs
 RUN chmod +x /usr/local/bin/setup-wordpress
 
 # Tests
